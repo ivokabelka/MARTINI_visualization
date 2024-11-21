@@ -183,7 +183,10 @@ def split_bond_record(row, defines):
     b = row.split()
 
     # Bond or constrained length defined either in line or via a variable
-    bond_length = defines[b[3]] if b[3] in defines.keys() else float(b[3])
+    try:
+        bond_length = defines[b[3]] if b[3] in defines.keys() else float(b[3])
+    except IndexError:
+        bond_length = 0.0
 
     return int(b[0]), int(b[1]), bond_length
 
